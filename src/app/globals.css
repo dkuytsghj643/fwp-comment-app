@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --forest:  #1B3A2D;
+  --river:   #2A5F7F;
+  --clay:    #C17F24;
+  --cream:   #F7F2E8;
+  --parchment: #EDE7D6;
+  --bark:    #2C1A0E;
+  --sage:    #6B8C6B;
+  --mist:    #E8EEF0;
+  --slate:   #4A5E6A;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--cream);
+  color: var(--bark);
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grain texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.5;
+}
+
+/* Proposal card hover */
+.proposal-card {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.proposal-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(27,58,45,0.14);
+}
+
+/* Stance button active state */
+.stance-btn {
+  transition: all 0.14s ease;
+}
+.stance-btn.active-support  { background: var(--forest); color: white; border-color: var(--forest); }
+.stance-btn.active-oppose   { background: #7A1A1A; color: white; border-color: #7A1A1A; }
+.stance-btn.active-modify   { background: var(--river); color: white; border-color: var(--river); }
+
+/* Spin animation for loading */
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner { animation: spin 0.8s linear infinite; }
+
+/* Slide up for modal */
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+.slide-up { animation: slideUp 0.22s ease forwards; }
+
+/* Fade in for generated text */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.fade-in { animation: fadeIn 0.4s ease forwards; }
